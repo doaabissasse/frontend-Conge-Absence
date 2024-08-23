@@ -1,0 +1,25 @@
+/* LeaveRequestALL.css */
+.table th, .table td {
+    font-size: 0.7rem; /* Réduit la taille de la police */
+    padding: 0.4rem;   /* Réduit les espaces internes */
+}
+
+.table th {
+    white-space: nowrap; /* Empêche les retours à la ligne */
+}
+
+.table td {
+    overflow: hidden; /* Masque le texte débordant */
+    text-overflow: ellipsis; /* Ajoute des points de suspension pour le texte trop long */
+}
+
+.table-responsive{
+    margin-top: 6%;
+}
+.table-success {
+    background-color: #d4edda !important; /* Vert clair pour les demandes approuvées */
+}
+
+.table-danger {
+    background-color: #f8d7da !important; /* Rouge clair pour les demandes refusées */
+}

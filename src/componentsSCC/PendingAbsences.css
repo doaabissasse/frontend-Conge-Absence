@@ -1,0 +1,15 @@
+/* Custom button styles */
+.btnAccepter {
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #30b950;
+  border-color: #30b950;
+}
+
+.btnRefuser {
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #d23131;
+  border-color: #d23131;
+}
+

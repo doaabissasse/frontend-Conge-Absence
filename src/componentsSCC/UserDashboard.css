@@ -1,0 +1,26 @@
+/* UserDashboard.css */
+.sidebar {
+    height: 100vh;
+    padding-top: 20px;
+    border-right: 1px solid #dee2e6;
+}
+.logo-container {
+    text-align: center;
+}
+.logo {
+    max-width: 60%;
+    height: auto;
+}
+.nav-link {
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.nav-link:hover {
+    color: #fff;
+    background-color: #309261;
+}
+.welcome-message {
+    margin-top: 50px;
+}

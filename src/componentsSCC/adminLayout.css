@@ -1,0 +1,48 @@
+.sidebar {
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: auto; /* Hauteur automatique en fonction du contenu */
+    min-height: 190vh; /* Assure que la barre latérale prend au moins 100% de la hauteur de la vue */
+    position: relative; /* Fixe la barre latérale pour qu'elle reste en place lors du défilement */
+  }
+  
+  .logo-container .logo {
+    width: 100%;
+  }
+  .name {
+    color: #333;
+  }
+  /* Topbar Logo */
+.topbar-logo {
+  width: 50px;
+}
+  
+  .nav-item {
+    margin-bottom: 10px;
+  }
+  
+  .nav-link {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .nav-link:hover {
+    color: #ffffff;
+  }
+  .container-fluid {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .btn {
+    color: rgb(0, 0, 0); /* Ensure the text color contrasts well with the button background */
+    font-weight: bold;
+    background-color: #1d975a;
+    border-color: #1d975a;
+  }
+  .top-bar-custom {
+    background-color: #acf7ca; /* Couleur verte */
+    color: #FFFFFF; /* Couleur du texte blanc */
+  }
+  

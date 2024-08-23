@@ -1,0 +1,78 @@
+/* Color guide position and styling */
+.color-guide {
+    position: absolute;
+    right: 5px;
+    top: 55px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 1px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.color-guide ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.color-guide li {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.color-guide span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+
+.list-inline-item {
+    margin-right: 20px;
+}
+
+.rbc-calendar {
+    max-width: 4500px;
+    max-height: 450px; /* Réduire la largeur maximale du calendrier */
+    margin: 0 auto; /* Centrer le calendrier horizontalement */
+}
+
+.rbc-today {
+    background-color: #7bade2 !important;
+    color: white !important;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.rbc-header {
+    padding: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.rbc-event {
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px; /* Ajouter du padding pour agrandir les événements */
+    font-size: 14px; /* Augmenter la taille de la police */
+}
+
+/* Agrandir la hauteur des événements */
+.rbc-event-content {
+    font-size: 16px; /* Augmenter la taille de la police pour le texte des événements */
+    line-height: 1.5; /* Augmenter la hauteur de ligne pour agrandir l'événement */
+}
+.rbc-month-view .rbc-day-bg {
+    padding: 2px; /* Réduire le padding à l'intérieur des cases des jours */
+}
+
+.rbc-month-view .rbc-date-cell {
+    padding: 2px; /* Réduire le padding à l'intérieur des cellules de date */
+}
+  

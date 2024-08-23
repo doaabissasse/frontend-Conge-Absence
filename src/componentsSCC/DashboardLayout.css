@@ -1,0 +1,55 @@
+/* Sidebar Styles */
+.sidebar {
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #343a40; /* Couleur de fond */
+  height: auto; /* Hauteur automatique en fonction du contenu */
+  min-height: 190vh; /* Assure que la barre latérale prend au moins 100% de la hauteur de la vue */
+  position: relative; /* Fixe la barre latérale pour qu'elle reste en place lors du défilement */
+}
+
+/* Logo in Sidebar */
+.logo-container .logo {
+  width: 100%;
+}
+
+/* Topbar Logo */
+.topbar-logo {
+  width: 50px;
+}
+
+/* Navigation Links */
+.nav-item {
+  margin-bottom: 10px;
+}
+
+.nav-link {
+  font-size: 14px; /* Réduit la taille de la police */
+  color: #f7f4f4;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+/* Container Fluid */
+.container-fluid {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row No-Gutters */
+.row.no-gutters {
+  flex-grow: 1; /* Permet à la rangée principale de prendre toute la hauteur disponible */
+  display: flex;
+  min-height: 100vh; /* Assure que la rangée principale prend au moins la hauteur de la vue */
+}
+
+/* Button Styles */
+.btn {
+  color: white;
+  font-weight: bold;
+  background-color: #1d975a;
+  border-color: #1d975a;
+}

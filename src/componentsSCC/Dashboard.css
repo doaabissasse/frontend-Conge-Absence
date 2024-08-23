@@ -1,0 +1,27 @@
+.card-border-success {
+    border-color: #075c1b; /* Green color */
+  }
+  
+  .card-header-success {
+    background-color: #7cb07c; /* Green color */
+    color: #fff;
+  }
+  
+  .card-border-warning {
+    border-color: #e7bf44; /* Yellow color */
+  }
+  
+  .card-header-warning {
+    background-color: #ffe9a7; /* Yellow color */
+    color: #000;
+  }
+  
+  .card-border-danger {
+    border-color: #dc3545; /* Red color */
+  }
+  
+  .card-header-danger {
+    background-color: #eb374c; /* Red color */
+    color: #fff;
+  }
+  

@@ -1,0 +1,201 @@
+/* Conteneur du calendrier */
+.calendar-container {
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+/* Style pour le cadre Card */
+.custom-card {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 100%;
+}
+.justify-content-between{
+  margin-top: 8%;
+}
+
+/* Style pour le contenu Card.Body */
+.custom-card-body {
+  padding: 40px;
+  background-color: #fff;
+}
+
+/* Style du calendrier horizontal */
+.horizontal-calendar {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+/* En-tête du calendrier */
+.horizontal-calendar-header {
+  display: flex;
+  flex-direction: row;
+  background-color: #f0f0f0;
+}
+
+/* Cellules de l'en-tête du calendrier */
+.horizontal-calendar-header-cell {
+  flex: 1;
+  min-width: 30px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  border-right: 1px solid #ddd;
+  box-sizing: border-box;
+  background-color: inherit;
+}
+
+/* Cellule d'en-tête des employés */
+.horizontal-calendar-header-employee {
+  background-color: #e0e0e0;
+  color: #333;
+  flex: 0 0 200px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  border-right: 2px solid #888;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cellules des jours du calendrier */
+.horizontal-calendar-cell {
+  flex: 1;
+  min-width: 30px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  text-align: center;
+  border-right: 1px solid #ddd;
+  box-sizing: border-box;
+  background-color: inherit;
+}
+
+/* Cellules avec événements */
+.horizontal-calendar-cell.has-event {
+  background-color: #e0f7fa;
+}
+
+/* Événements dans les cellules */
+.horizontal-calendar-event {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Ligne des utilisateurs */
+.horizontal-calendar-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Bordure en bas uniquement pour la première ligne */
+.horizontal-calendar-row:first-of-type {
+  border-bottom: 2px solid #000;
+}
+
+/* Cellule d'utilisateur */
+.horizontal-calendar-user-cell {
+  background-color: #f9f9f9;
+  color: #333;
+  flex: 0 0 200px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  border-right: 2px solid #888;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.color-guide {
+  margin-bottom: 20px;
+  margin-top: 2%;
+}
+
+.color-guide ul {
+  list-style: none;
+  padding: 0;
+}
+
+.color-guide li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.color-guide .legend-absence {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #feffaa; /* Jaune pour les absences */
+  border: 1px solid #ddd;
+  margin-right: 5px;
+}
+
+.color-guide .legend-approved {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #89d69f; /* Vert pour les congés approuvés */
+  border: 1px solid #ddd;
+  margin-right: 5px;
+}
+
+.color-guide .legend-pending {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: repeating-linear-gradient(50deg, transparent, #ffffff 5px, #89d69f 10px, #89d69f 15px); /* Vert avec lignes pour les congés en attente */
+  border: 1px solid #ddd;
+  margin-right: 5px;
+}
+.horizontal-calendar-cell {
+  position: relative;
+  height: 30px;
+  border: 1px solid #ddd;
+}
+
+.horizontal-calendar-event {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.horizontal-calendar-event.leave {
+  height: 100%;
+  background-color: #89d69f;
+}
+
+.horizontal-calendar-event.leave-pending {
+  border: 2px solid #89d69f;
+  background-color: transparent;
+  height: 100%;
+}

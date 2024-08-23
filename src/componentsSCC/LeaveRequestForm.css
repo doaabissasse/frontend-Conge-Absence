@@ -1,0 +1,27 @@
+
+.alert-success-custom {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  /* LeaveRequestForm.css */
+
+.card {
+  background-color: #f8f9fa;
+}
+
+.btn-success {
+  background-color: #127d2b;
+  border-color: #28a745;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+

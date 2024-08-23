@@ -1,0 +1,52 @@
+.profile-container {
+    padding: 20px;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 18px;
+    color: #007bff;
+  }
+  
+  .error {
+    text-align: center;
+    font-size: 18px;
+    color: #dc3545;
+  }
+  
+  .profile-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+  }
+  
+  .profile-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%; /* Ensure it takes full width */
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30%;
+  }
+  
+  .profile-details p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .profile-details strong {
+    color: #333;
+  }
+  
+  .text-center {
+    text-align: center; /* Center the text horizontally */
+  }
+  

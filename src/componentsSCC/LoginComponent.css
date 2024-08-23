@@ -1,0 +1,57 @@
+/* LoginComponent.css */
+.logo {
+    width:150px;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    border-radius: 10px;
+    /* Ajustez la largeur du formulaire */
+    width: 100%;
+    max-width: 900px; /* Largeur maximale du formulaire */
+    margin: 0 auto; /* Centrer le formulaire */
+  }
+  
+  .card-body {
+    padding: 9rem;
+  }
+  .mr-2{
+    width: 20%;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .flex-grow-1 {
+    flex-grow: 1;
+  }
+  
+  .position-relative {
+    position: relative;
+  }
+  
+  .position-absolute {
+    position: absolute;
+  }
+  
+  .pr-4 {
+    padding-right: 2.5rem; /* Espace pour l'icône */
+  }
+  
+  .btn-block {
+    width: 30%;
+    margin-left: 11rem;
+    
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  
+  
