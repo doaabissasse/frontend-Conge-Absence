@@ -25,3 +25,26 @@
     color: #fff;
   }
   
+  .card-body {
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  .card-text {
+    font-size: 2rem; /* Ajustez la taille selon vos besoins */
+  }
+  .h1 {
+    margin-left: 90%;
+    text-align: center;
+    font-size: 0.9rem; /* Réduit la taille du titre de la carte */
+  }
+  .card-title {
+    text-align: center;
+    font-size: 0.9rem; /* Réduit la taille du titre de la carte */
+  }
+  .chart-container {
+    width: 100%;
+    height: 200px; /* Ajustez la hauteur selon vos besoins */
+  }
+  
+  

@@ -2,31 +2,31 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import LoginComponent from './components/LoginComponent';
-import AdminDashboard from './components/AdminDashboard';
-import UserDashboard from './components/UserDashboard';
-import SuperDashboard from './components/SuperDashboard';
-import PendingAbsences from './components/PendingAbsences';
-import LeaveRequestForm from './components/LeaveRequestForm';
-import LeaveRequests from './components/LeaveRequests';
-import Dashboard from './components/Dashboard';
-import LeaveRequestALL from './components/LeaveRequestALL';
-import PendingLeaveRequests from './components/PendingLeaveRequests';
-import AdditionalInfo from './components/AdditionalInfo';
+import LoginComponent from './components/LoginComponent';// page de login 
+import AdminDashboard from './components/AdminDashboard';// c'est l'interface de l'admin  
+import UserDashboard from './components/UserDashboard';// c'est l'interface de user
+import SuperDashboard from './components/SuperDashboard';// c'est l'interface de superviseur 
+import PendingAbsences from './components/PendingAbsences';// les absences qui ont en attentes 
+import LeaveRequestForm from './components/LeaveRequestForm';//la page de la formulaire des conges 
+import LeaveRequests from './components/LeaveRequests';// l'affichage  les conges d'un user 
+import Dashboard from './components/Dashboard';// la page qui affiche les statistiques
+import LeaveRequestALL from './components/LeaveRequestALL';// l'affichage  les conges de tous les users
+import PendingLeaveRequests from './components/PendingLeaveRequests';// les congés qui ont en attentes 
+import AdditionalInfo from './components/AdditionalInfo';// page de profile
 import NotFound from './components/NotFound'; 
-import AbsenceForm from './components/AbsenceForm';
-import SuivieAbsences from './components/SuivieAbsences';
-import EmployeeList from './components/EmployeeList';
-import AbsenceFormAdmin from './components/AbsenceFormAdmin';
-import AbsencesListAdmin from './components/AbsencesListAdmin';
-import SuivieAbsenceAdmin from './components/SuivieAbsenceAdmin';
-import AbsencesListUser from './components/AbsencesListUser';// A component to display when the route is not found
+import AbsenceForm from './components/AbsenceForm';//la page de la formulaire des absences
+import SuivieAbsences from './components/SuivieAbsences';// suivre les conges et les absences pour un user
+import EmployeeList from './components/EmployeeList';// la liste des employes et aussi la recherche
+import AbsenceFormAdmin from './components/AbsenceFormAdmin';//la formulaire des absences des users pour l'admin
+import AbsencesListAdmin from './components/AbsencesListAdmin';//lister les absences de tous les users
+import SuivieAbsenceAdmin from './components/SuivieAbsenceAdmin';//suivres de toutes les absences et les congés
+import AbsencesListUser from './components/AbsencesListUser';//lister les absences avec la possibilité du modifier la justification dans le cas de refusion ou non justifié
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginComponent />} /> {/* Route for root path */}
+        <Route path="/" element={<LoginComponent />} /> 
         <Route path="/login" element={<LoginComponent />} />
         <Route path="/SuivieAbsenceAdmin" element={<SuivieAbsenceAdmin />} />
         <Route path="/EmployeeList" element={<EmployeeList />} />

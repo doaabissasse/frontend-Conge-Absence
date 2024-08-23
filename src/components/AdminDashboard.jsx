@@ -6,52 +6,45 @@ import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './adminLayout';
 import { FaBell, FaExclamationTriangle } from 'react-icons/fa';
 
+/**
+ * Composant pour le tableau de bord de l'administrateur
+ * Affiche les notifications pour les nouvelles demandes de congés et absences
+ */
 const AdminDashboard = () => {
-  const [user, setUser] = useState(null);
-  const [previousPendingRequestsCount, setPreviousPendingRequestsCount] = useState(0);
-  const [previousPendingJustificationsCount, setPreviousPendingJustificationsCount] = useState(0);
+  const [user, setUser] = useState(null); // Détails de l'utilisateur connecté
+  const [previousPendingRequestsCount, setPreviousPendingRequestsCount] = useState(0); // Compteur des demandes de congés en attente
+  const [previousPendingJustificationsCount, setPreviousPendingJustificationsCount] = useState(0); // Compteur des absences en attente
+  const [leaveNotificationShown, setLeaveNotificationShown] = useState(false); // État pour suivre la notification des demandes de congés
+  const [justificationNotificationShown, setJustificationNotificationShown] = useState(false); // État pour suivre la notification des absences
 
+  // Récupère les détails de l'utilisateur lors du chargement du composant
   useEffect(() => {
     AuthService.getUserDetails().then(
-      (response) => {
-        setUser(response.data);
-      },
-      () => {
-        toast.error('Échec de la récupération des détails de l\'utilisateur', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
+      (response) => setUser(response.data),
+      () => toast.error('Échec de la récupération des détails de l\'utilisateur') // Affiche une erreur si la récupération échoue
     );
   }, []);
 
+  // Récupère les demandes de congés et les absences en attente
   useEffect(() => {
     const fetchPendingLeaveRequests = async () => {
       try {
         const token = AuthService.getCurrentUserToken();
-        if (!token) {
-          throw new Error('Aucun token trouvé');
-        }
+        if (!token) throw new Error('Aucun token trouvé');
 
         const response = await axios.get('http://localhost:8080/api/leave-requests', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
-        const pendingRequests = response.data.filter(request => request.status === 'En attente');
-        if (pendingRequests.length > previousPendingRequestsCount) {
-          toast.info(<div><FaBell /> Il y a une nouvelle demande de congé en attente!</div>, {
-            position: "top-right",
-            autoClose: false,
-            closeOnClick: true,
-            draggable: true,
+        const pendingRequests = response.data.filter(request => 
+          request.status === 'En attente' && request.supervisorApproved === false
+        );
+
+        if (pendingRequests.length > previousPendingRequestsCount && !leaveNotificationShown) {
+          toast.info(<div><FaBell /> Nouvelle demande de congé en attente!</div>, {
+            autoClose: false, // Désactive la fermeture automatique
           });
+          setLeaveNotificationShown(true); // Marque la notification des demandes de congés comme affichée
         }
         setPreviousPendingRequestsCount(pendingRequests.length);
       } catch (error) {
@@ -62,24 +55,21 @@ const AdminDashboard = () => {
     const fetchPendingJustifications = async () => {
       try {
         const token = AuthService.getCurrentUserToken();
-        if (!token) {
-          throw new Error('Aucun token trouvé');
-        }
+        if (!token) throw new Error('Aucun token trouvé');
 
         const response = await axios.get('http://localhost:8080/api/absences', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
-        const pendingJustifications = response.data.filter(absence => absence.justificationAccepted === 'En attente');
-        if (pendingJustifications.length > previousPendingJustificationsCount) {
-          toast.warning(<div><FaExclamationTriangle /> Il y a une nouvelle  absence en attente!</div>, {
-            position: "top-right",
-            autoClose: false,
-            closeOnClick: true,
-            draggable: true,
+        const pendingJustifications = response.data.filter(absence => 
+          absence.justificationAccepted === 'En attente' && absence.supervisorApproved === false
+        );
+
+        if (pendingJustifications.length > previousPendingJustificationsCount && !justificationNotificationShown) {
+          toast.warning(<div><FaExclamationTriangle /> Nouvelle absence en attente!</div>, {
+            autoClose: false, // Désactive la fermeture automatique
           });
+          setJustificationNotificationShown(true); // Marque la notification des absences comme affichée
         }
         setPreviousPendingJustificationsCount(pendingJustifications.length);
       } catch (error) {
@@ -90,20 +80,20 @@ const AdminDashboard = () => {
     fetchPendingLeaveRequests();
     fetchPendingJustifications();
 
+    // Re-vérifie les demandes de congés et absences toutes les 5 secondes
     const interval = setInterval(() => {
       fetchPendingLeaveRequests();
       fetchPendingJustifications();
     }, 5000);
 
-    return () => clearInterval(interval);
-  }, [previousPendingRequestsCount, previousPendingJustificationsCount]);
+    return () => clearInterval(interval); // Nettoie l'intervalle lors du démontage du composant
+  }, [previousPendingRequestsCount, previousPendingJustificationsCount, leaveNotificationShown, justificationNotificationShown]);
 
   return (
     <AdminLayout>
       <ToastContainer />
       {user && (
-        <div>
-          <div className="container mt-4">
+        <div className="container mt-4">
           <div className="row">
             <div className="col-md-8">
               <h2 className="mb-3">Bienvenue dans <span className="text-success">Lifo</span></h2>
@@ -117,7 +107,6 @@ const AdminDashboard = () => {
               <img src="/entrer.jpeg" alt="Logo" className="img-fluid" style={{ maxWidth: '100%', height: 'auto' }} />
             </div>
           </div>
-        </div>
         </div>
       )}
     </AdminLayout>

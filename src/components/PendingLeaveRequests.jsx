@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import AuthService from '../tests/AuthService';
-import AdminLayout from './adminLayout';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaCheck, FaTimes } from 'react-icons/fa';
-import '../componentsSCC/PendingAbsences.css';
+import AuthService from '../tests/AuthService'; // Service pour gérer l'authentification
+import AdminLayout from './adminLayout'; // Mise en page spécifique à l'administrateur
+import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap pour le style
+import { FaCheck, FaTimes } from 'react-icons/fa'; // Icônes pour les boutons d'action
+import '../componentsSCC/PendingAbsences.css'; // Styles spécifiques pour le composant
 
+/**
+ * Composant pour afficher et gérer les demandes de congés en attente.
+ * Affiche une liste de demandes de congés filtrées par rôle d'utilisateur (ADMIN ou SUPERVISEUR).
+ * Permet d'approuver ou de rejeter les demandes en fonction du rôle.
+ */
 const PendingLeaveRequests = () => {
+  // État pour stocker les demandes de congés en attente
   const [leaveRequests, setLeaveRequests] = useState([]);
+  // État pour stocker les messages d'erreur
   const [error, setError] = useState('');
+  // État pour stocker le rôle de l'utilisateur
   const [userRole, setUserRole] = useState('');
 
+  // Effet pour récupérer les détails de l'utilisateur à l'initialisation du composant
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
+        // Appel au service d'authentification pour obtenir les détails de l'utilisateur
         const response = await AuthService.getUserDetails();
-        setUserRole(response.data.role); // Adjust this based on your actual user details structure
+        // Définir le rôle de l'utilisateur en fonction des détails récupérés
+        setUserRole(response.data.role);
       } catch (error) {
+        // Gestion des erreurs en cas d'échec de la récupération des détails
         console.error('Failed to fetch user details:', error);
       }
     };
@@ -24,14 +36,17 @@ const PendingLeaveRequests = () => {
     fetchUserDetails();
   }, []);
 
+  // Effet pour récupérer les demandes de congés en attente lorsque le rôle est défini
   useEffect(() => {
     const fetchPendingLeaveRequests = async () => {
       try {
+        // Récupérer le token de l'utilisateur pour l'authentification
         const token = AuthService.getCurrentUserToken();
         if (!token) {
           throw new Error('No token found');
         }
 
+        // Appel à l'API pour obtenir les demandes de congés
         const response = await axios.get('http://localhost:8080/api/leave-requests', {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -41,6 +56,7 @@ const PendingLeaveRequests = () => {
         const allRequests = response.data;
         console.log('All requests:', allRequests);
 
+        // Filtrer les demandes en attente en fonction du rôle de l'utilisateur
         const pendingRequests = allRequests.filter(request => {
           console.log('User Role:', userRole);
           console.log(`Filtering request ${request.id} - Status: ${request.status}, Supervisor Approved: ${request.supervisorApproved}`);
@@ -53,18 +69,21 @@ const PendingLeaveRequests = () => {
         });
 
         console.log('Pending Requests:', pendingRequests);
+        // Mettre à jour l'état avec les demandes en attente filtrées
         setLeaveRequests(pendingRequests);
       } catch (error) {
+        // Gestion des erreurs en cas d'échec de la récupération des demandes
         console.error('Error fetching leave requests:', error);
         setError('Failed to fetch leave requests');
       }
     };
 
-    if (userRole) { // Fetch leave requests only if userRole is defined
+    if (userRole) { // Récupérer les demandes seulement si le rôle est défini
       fetchPendingLeaveRequests();
     }
   }, [userRole]);
 
+  // Fonction pour approuver une demande de congé
   const approveRequest = async (id) => {
     try {
       const response = await axios.put(`http://localhost:8080/api/leave-requests/${id}/approve`, {}, {
@@ -73,6 +92,7 @@ const PendingLeaveRequests = () => {
         },
       });
       if (response.status === 200) {
+        // Mettre à jour l'état pour retirer la demande approuvée
         setLeaveRequests(leaveRequests.filter(request => request.id !== id));
       }
     } catch (error) {
@@ -80,6 +100,7 @@ const PendingLeaveRequests = () => {
     }
   };
 
+  // Fonction pour rejeter une demande de congé
   const rejectRequest = async (id) => {
     try {
       const response = await axios.put(`http://localhost:8080/api/leave-requests/${id}/reject`, {}, {
@@ -88,6 +109,7 @@ const PendingLeaveRequests = () => {
         },
       });
       if (response.status === 200) {
+        // Mettre à jour l'état pour retirer la demande rejetée
         setLeaveRequests(leaveRequests.filter(request => request.id !== id));
       }
     } catch (error) {
@@ -95,6 +117,7 @@ const PendingLeaveRequests = () => {
     }
   };
 
+  // Fonction pour approuver une demande en tant qu'administrateur (si le superviseur a déjà approuvé)
   const AdminApproveRequest = async (id) => {
     try {
       const response = await axios.put(`http://localhost:8080/api/leave-requests/${id}/admin-approve`, {}, {
@@ -103,6 +126,7 @@ const PendingLeaveRequests = () => {
         },
       });
       if (response.status === 200) {
+        // Mettre à jour l'état pour marquer la demande comme approuvée par le superviseur
         setLeaveRequests(leaveRequests.map(request => 
           request.id === id ? { ...request, supervisorApproved: true } : request
         ));
@@ -112,18 +136,21 @@ const PendingLeaveRequests = () => {
     }
   };
 
+  // Fonction pour formater les dates au format 'dd/mm/yyyy'
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Les mois sont basés sur zéro
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
 
+  // Afficher un message d'erreur s'il y en a
   if (error) {
     return <div className="alert alert-danger">{error}</div>;
   }
 
+  // Rendu du composant
   return (
     <AdminLayout>
       <div className="container mt-4">
@@ -194,6 +221,7 @@ const PendingLeaveRequests = () => {
 };
 
 export default PendingLeaveRequests;
+
 
 
 
